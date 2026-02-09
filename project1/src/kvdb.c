@@ -65,18 +65,20 @@ struct KeyValue* getCmd(struct KeyValue* pairs, const char* key)
 {
     for (int i = 0; i < MAX_PAIRS; ++i)
     {
-        // if key is null continue
+        // if key is null, continue to next pair
         if (pairs[i].key[0] == '\0')
         {
             continue;
         }
 
-        // if keys matched, return the kv pair
+        // if keys matched, return the address of kv pair
         if (strcmp(pairs[i].key, key) == 0)
         {
             return &pairs[i];
         }
     }
+
+    // if kv pair not found (doesn't exist)
 	return NULL;
 }
 
@@ -85,7 +87,7 @@ bool deleteCmd(struct KeyValue* pairs, const char* key)
     // case 1: if key existed to be deleted
     for (int i = 0; i < MAX_PAIRS; ++i)
     {
-        // if key is null continue
+        // if key is null, continue to next pair
         if (pairs[i].key[0] == '\0')
         {
             continue;
