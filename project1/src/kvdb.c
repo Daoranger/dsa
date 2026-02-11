@@ -110,7 +110,8 @@ void printCmd(struct KeyValue* pairs)
 {
     for (int i = 0; i < MAX_PAIRS; ++i)
     {
-        printf("%s : %s\n", pairs[i].key, pairs[i].value);
+        if (pairs[i].key[0] != '\0')
+            printf("%s : %s\n", pairs[i].key, pairs[i].value);
     }
 }
 
