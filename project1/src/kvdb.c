@@ -5,7 +5,7 @@
  * Author: Hoang Nguyen
  *
  * Date created: 1/29/2026
- * Last modified: 2/9/2026
+ * Last modified: 2/11/2026
  *
  * Description: This program will demonstrate a key-value pairs database.
  * User can use commands such as SET, GET, DELETE, PRINT to use the functionalities of the database.
@@ -106,15 +106,6 @@ bool deleteCmd(struct KeyValue* pairs, const char* key)
     return false;
 }
 
-void printCmd(struct KeyValue* pairs)
-{
-    for (int i = 0; i < MAX_PAIRS; ++i)
-    {
-        if (pairs[i].key[0] != '\0')
-            printf("%s : %s\n", pairs[i].key, pairs[i].value);
-    }
-}
-
 int main(void)
 {
     // Array to store kv pairs
@@ -173,6 +164,7 @@ int main(void)
         else if (strcmp(command, "GET") == 0)
         {
             char* key = strtok(NULL, " \t\n");
+
             char* value = strtok(NULL, " \t\n");
 
             if (!key || value)
@@ -181,15 +173,22 @@ int main(void)
             }
             else
             {
+
+                if (strlen(key) >= MAX_KEY_LENGTH)
+                {
+                    printf("ERROR: Key exceeded max length of 20\n\n");
+                    continue;
+                }
+
                 struct KeyValue* foundPair = getCmd(pairs, key);
 
                 if (foundPair)
                 {
-                    printf("SUCCESS: (%s, %s)\n", key, foundPair->value);
+                    printf("(%s, %s)\n", key, foundPair->value);
                 }
                 else
                 {
-                    printf("ERROR: (%s, (null))\n", key);
+                    printf("(%s, (null))\n", key);
                 }
             }
         }
@@ -204,27 +203,22 @@ int main(void)
             }
             else
             {
-                if (deleteCmd(pairs, key))
+                if (strlen(key) >= MAX_KEY_LENGTH)
                 {
-                    printf("SUCCESS: Deleted pair with key %s\n", key);
+                    printf("ERROR: Key exceeded max length of 20\n\n");
+                    continue;
                 }
-                else
-                {
-                    printf("ERROR: Pair with key %s not found\n", key);
-                }
+
+                deleteCmd(pairs, key);
             }
         }
         else if (strcmp(command, "EXIT") == 0)
         {
             exit(0);
         }
-        else if (strcmp(command, "PRINT") == 0)
-        {
-            printCmd(pairs);
-        }
         else
         {
-            printf("ERROR: Invalid command. Use GET/SET/DELETE/PRINT/EXIT\n");
+            printf("ERROR: Invalid command, use GET/SET/DELETE/EXIT\n");
         }
 
 		printf("\n");
