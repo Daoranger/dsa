@@ -18,7 +18,11 @@ public:
     int getY() const;
 };
 
-float distance(XYPoint p1, XYPoint p2);
+float distance(const XYPoint& p1, const XYPoint& p2);
+float distance(const XYPoint& p1, const XYPoint& p2, const XYPoint& p3);
+float distance(const XYPoint& p1, const XYPoint& p2, const XYPoint& p3, const XYPoint& p4);
+float distance(const XYPoint& p1, const XYPoint& p2, const XYPoint& p3, const XYPoint& p4, const XYPoint& p5);
+
 
 
 #endif //PROJECT2_XYPOINT_H

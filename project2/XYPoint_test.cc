@@ -22,3 +22,14 @@ TEST(DistanceTest, TwoPoints)
     // difference <= tolerance (pass), difference > tolerance (fail)
     EXPECT_NEAR(d, 2.8284271247462, 1e-6);
 }
+
+TEST(DistanceTest, ThreePoints)
+{
+    XYPoint point1(2, 2);
+    XYPoint point2(4, 4);
+    XYPoint point3(6, 6);
+    const float d = distance(point1, point2, point3);
+    const float expected = distance(point1, point2) + distance(point2, point3);
+    EXPECT_NEAR(d, expected, 1e-6);
+}
+
