@@ -14,8 +14,6 @@ public:
     int y;
 
     XYPoint(int xc, int yc);
-    int getX() const;
-    int getY() const;
 };
 
 float distance(const XYPoint& p1, const XYPoint& p2);

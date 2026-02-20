@@ -11,16 +11,6 @@ XYPoint::XYPoint(int xc, int yc)
 {
 }
 
-int XYPoint::getX() const
-{
-    return x;
-}
-
-int XYPoint::getY() const
-{
-    return y;
-}
-
 float distance(const XYPoint& p1, const XYPoint& p2)
 {
     float dx = static_cast<float>(p2.x)  - static_cast<float>(p1.x);
