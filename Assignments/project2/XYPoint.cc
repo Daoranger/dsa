@@ -1,5 +1,10 @@
 //
-// Created by hoang on 2/16/2026.
+// XYPoint.cc
+//
+// Author: Hoang Nguyen
+//
+// Data created: 2/16/2026
+// Last modified: 2/23/2026
 //
 
 #include "XYPoint.h"
@@ -13,8 +18,8 @@ XYPoint::XYPoint(int xc, int yc)
 
 float distance(const XYPoint& p1, const XYPoint& p2)
 {
-    float dx = static_cast<float>(p2.x)  - static_cast<float>(p1.x);
-    float dy = static_cast<float>(p2.y)  - static_cast<float>(p1.y);
+    float dx = static_cast<float>(p2.x) - static_cast<float>(p1.x);
+    float dy = static_cast<float>(p2.y) - static_cast<float>(p1.y);
     return std::sqrt(dx * dx + dy * dy);
 }
 
