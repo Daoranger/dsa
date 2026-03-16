@@ -22,7 +22,10 @@ Book::~Book()
 
 void Book::checkout()
 {
-	m_checkedOut = true;
+	if (isAvailable())
+	{
+		m_checkedOut = true;
+	}
 }
 
 void Book::returnBook()

@@ -6,10 +6,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Catch2 3 REQUIRED)
 
+add_executable(LibraryManager
+        Book.cc
+        User.cc
+        main.cc
+)
+
 add_executable(LibraryTests
         test.cc
         Book.cc
 )
+
 target_link_libraries(LibraryTests PRIVATE Catch2::Catch2WithMain)
 
 include(CTest)
