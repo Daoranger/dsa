@@ -33,7 +33,7 @@ void Book::returnBook()
 	m_checkedOut = false;
 }
 
-bool Book::isAvailable()
+bool Book::isAvailable() const
 {
 	return !m_checkedOut;
 }

@@ -9,12 +9,17 @@ find_package(Catch2 3 REQUIRED)
 add_executable(LibraryManager
         Book.cc
         User.cc
+        Library.cc
         main.cc
 )
 
 add_executable(LibraryTests
-        test.cc
+        #tests/BookTest.cc
+        #tests/UserTest.cc
+        tests/LibraryTest.cc
         Book.cc
+        User.cc
+        Library.cc
 )
 
 target_link_libraries(LibraryTests PRIVATE Catch2::Catch2WithMain)

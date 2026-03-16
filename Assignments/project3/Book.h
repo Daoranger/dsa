@@ -12,7 +12,7 @@ public:
 	~Book();
 	void checkout();
 	void returnBook();
-	bool isAvailable();
+	bool isAvailable() const;
 	std::string getTitle() const;
 	std::string getAuthor() const;
 	int getId() const;

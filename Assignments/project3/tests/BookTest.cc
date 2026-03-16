@@ -1,5 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "Book.h"
+#include "../Book.h"
 
 TEST_CASE("Book constructor/getters", "[constructor/getters]")
 {

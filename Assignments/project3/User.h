@@ -9,13 +9,16 @@
 class User
 {
 public:
-    User(std::string name);
+    User(std::string name, int);
     void userBorrow(Book& book);
     void userReturn(Book& book);
     friend std::ostream& operator<<(std::ostream& out, const User& user);
+    std::string getName() const;
+    int getID() const;
 
 private:
     std::string m_name;
+    int m_id;
     std::vector<Book*> m_borrowedBooks;
 
 };
