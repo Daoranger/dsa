@@ -44,6 +44,11 @@ std::string Book::getTitle() const
 	return m_title;
 }
 
+std::string Book::getAuthor() const
+{
+	return m_author;
+}
+
 int Book::getId() const
 {
 	return m_id;
@@ -51,5 +56,5 @@ int Book::getId() const
 
 bool Book::operator==(const Book& book)
 {
-	if (m_id == book.m_id) ? true : false;
+	return (m_id == book.m_id);
 }

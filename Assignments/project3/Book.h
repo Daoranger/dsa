@@ -11,9 +11,10 @@ public:
 	Book(const Book& other);
 	~Book();
 	void checkout();
-	Book returnBook();
+	void returnBook();
 	bool isAvailable();
 	std::string getTitle() const;
+	std::string getAuthor() const;
 	int getId() const;
 	bool operator== (const Book& book);
 
