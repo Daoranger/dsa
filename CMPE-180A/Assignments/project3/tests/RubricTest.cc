@@ -22,7 +22,7 @@ TEST_CASE("Test 3")
 {
     Book b1("A", "B", 101);
     Book b2("C", "D", 101);
-    User u("Patel", 11);
+    User u("Patel");
     u.userBorrow(b1);
     u.userBorrow(b2);
     REQUIRE(u.getBorrowBooksSize() == 2);
@@ -31,7 +31,7 @@ TEST_CASE("Test 3")
 TEST_CASE("Test 4")
 {
     Book b1("A", "B", 101);
-    User u("Patel", 11);
+    User u("Patel");
     u.userBorrow(b1);
 
     std::ostringstream out;
@@ -51,18 +51,18 @@ TEST_CASE("Test 5")
 TEST_CASE("Test 6")
 {
     Library lib;
-    User u("Patel", 99);
+    User u("Patel");
     lib.addUser(u);
-    REQUIRE(lib.getUserIdByName("Patel") == 99);
+    REQUIRE(lib.getUserIdByName("Patel") == 1);
 }
 
 TEST_CASE("Test 7")
 {
     Library lib;
     lib.addBook("Art of the Deal", "DJ Trump");
-    User u("Patel", 99);
+    User u("Patel");
     lib.addUser(u);
-    lib.checkoutBook(99, 1);
+    lib.checkoutBook(1, 1);
     REQUIRE(lib.findBook(1)->getCheckedOutStatus() == true);
     REQUIRE(u.getBorrowBooksSize() == 1);
 }
@@ -71,10 +71,10 @@ TEST_CASE("Test 8")
 {
     Library lib;
     lib.addBook("Art of the Deal", "DJ Trump");
-    User u("Patel", 99);
+    User u("Patel");
     lib.addUser(u);
-    lib.checkoutBook(99, 1);
-    lib.returnBook(99, 1);
+    lib.checkoutBook(1, 1);
+    lib.returnBook(1, 1);
     REQUIRE(lib.findBook(1)->getCheckedOutStatus() == false);
     REQUIRE(u.getBorrowBooksSize() == 0);
 }
@@ -83,9 +83,9 @@ TEST_CASE("Test 9")
 {
     Library lib;
     lib.addBook("Art of the Deal", "DJ Trump");
-    User u("Patel", 99);
+    User u("Patel");
     lib.addUser(u);
-    lib.checkoutBook(99, 1);
+    lib.checkoutBook(1, 1);
 
     std::ostringstream out;
     out << lib;

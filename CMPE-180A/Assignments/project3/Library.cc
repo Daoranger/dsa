@@ -8,6 +8,7 @@ void Library::addBook(const std::string& title, const std::string& author)
 
 void Library::addUser(User& user)
 {
+    user.setID(m_nextUserID++);
     m_users.push_back(&user);
 }
 

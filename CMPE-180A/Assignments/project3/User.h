@@ -9,12 +9,13 @@
 class User
 {
 public:
-    User(std::string name, int);
+    User(std::string name);
     void userBorrow(Book& book);
     void userReturn(Book& book);
     friend std::ostream& operator<<(std::ostream& out, const User& user);
     std::string getName() const;
     int getID() const;
+    void setID(int id);
     std::size_t getBorrowBooksSize() const;
 
 private:

@@ -1,9 +1,8 @@
 #include "User.h"
 #include <algorithm>
 
-User::User(std::string name, int id)
+User::User(std::string name)
     : m_name(name)
-    , m_id(id)
 {
 }
 
@@ -24,7 +23,7 @@ void User::userReturn(Book& book)
 std::ostream& operator<<(std::ostream& out, const User& user)
 {
     int counter { 1 };
-    out << user.m_name << "'s list of borrowed books:\n";
+    out << user.m_name << "'s (user id: " << user.m_id << ") list of borrowed books:\n";
     for (const auto& book : user.m_borrowedBooks)
     {
         out << counter++ << ". " << "\"" << book->getTitle() << "\" by " << book->getAuthor() << " (book id: " << book->getId() << ")\n";
@@ -40,6 +39,11 @@ std::string User::getName() const
 int User::getID() const
 {
     return m_id;
+}
+
+void User::setID(int id)
+{
+    m_id = id;
 }
 
 std::size_t User::getBorrowBooksSize() const

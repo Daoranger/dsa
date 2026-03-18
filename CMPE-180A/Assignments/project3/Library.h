@@ -20,6 +20,7 @@ public:
 
 private:
     int m_nextBookID{1};
+    int m_nextUserID{1};
     std::vector<Book> m_inventory;
     std::vector<User*> m_users;
 
