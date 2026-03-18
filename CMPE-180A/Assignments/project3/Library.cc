@@ -104,8 +104,8 @@ std::ostream& operator<<(std::ostream& out, const Library& library)
         out << counter++ << ". "
         << "\"" << book.getTitle() << "\" by "
         << book.getAuthor()
-        << " (book id: " << book.getId() << ") "
-        << "status: ";
+        << " (book id: " << book.getId() << ")"
+        << ", status: ";
 
         book.isAvailable() ? out << "available\n" : out << "not available\n";
     }

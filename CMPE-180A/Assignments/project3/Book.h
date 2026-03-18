@@ -16,6 +16,7 @@ public:
 	std::string getTitle() const;
 	std::string getAuthor() const;
 	int getId() const;
+	bool getCheckedOutStatus() const;
 	bool operator== (const Book& book);
 
 private:

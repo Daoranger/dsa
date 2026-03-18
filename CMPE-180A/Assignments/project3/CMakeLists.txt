@@ -16,10 +16,12 @@ add_executable(LibraryManager
 add_executable(LibraryTests
         #tests/BookTest.cc
         #tests/UserTest.cc
-        tests/LibraryTest.cc
+        #tests/LibraryTest.cc
+        tests/RubricTest.cc
         Book.cc
         User.cc
         Library.cc
+
 )
 
 target_link_libraries(LibraryTests PRIVATE Catch2::Catch2WithMain)

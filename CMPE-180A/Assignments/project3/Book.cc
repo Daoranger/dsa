@@ -53,6 +53,11 @@ int Book::getId() const
 	return m_id;
 }
 
+bool Book::getCheckedOutStatus() const
+{
+	return m_checkedOut;
+}
+
 bool Book::operator==(const Book& book)
 {
 	return (m_id == book.m_id);

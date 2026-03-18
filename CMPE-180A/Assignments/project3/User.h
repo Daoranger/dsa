@@ -15,6 +15,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const User& user);
     std::string getName() const;
     int getID() const;
+    std::size_t getBorrowBooksSize() const;
 
 private:
     std::string m_name;
