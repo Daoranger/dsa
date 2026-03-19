@@ -18,9 +18,10 @@ add_executable(LibraryTests
         #tests/UserTest.cc
         #tests/LibraryTest.cc
         tests/RubricTest.cc
-        Book.cc
-        User.cc
-        Library.cc
+#        Book.cc
+#        User.cc
+#        Library.cc
+        LibraryManagement.cc
 
 )
 

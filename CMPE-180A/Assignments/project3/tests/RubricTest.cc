@@ -1,7 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../Book.h"
-#include "../User.h"
-#include "../Library.h"
+#include "../LibraryManagement.h"
 #include <sstream>
 
 TEST_CASE("Test 1")
@@ -23,8 +21,8 @@ TEST_CASE("Test 3")
     Book b1("A", "B", 101);
     Book b2("C", "D", 101);
     User u("Patel");
-    u.userBorrow(b1);
-    u.userBorrow(b2);
+    u.borrow(b1);
+    u.borrow(b2);
     REQUIRE(u.getBorrowBooksSize() == 2);
 }
 
@@ -32,7 +30,7 @@ TEST_CASE("Test 4")
 {
     Book b1("A", "B", 101);
     User u("Patel");
-    u.userBorrow(b1);
+    u.borrow(b1);
 
     std::ostringstream out;
     out << u;
@@ -45,7 +43,7 @@ TEST_CASE("Test 5")
 {
     Library lib;
     lib.addBook("Art of the Deal", "DJ Trump");
-    REQUIRE(lib.getBookIdByTitle("Art of the Deal") == 1);
+    REQUIRE(lib.getBookIdByTitle("Art of the Deal") == 0);
 }
 
 TEST_CASE("Test 6")
@@ -53,7 +51,7 @@ TEST_CASE("Test 6")
     Library lib;
     User u("Patel");
     lib.addUser(u);
-    REQUIRE(lib.getUserIdByName("Patel") == 1);
+    REQUIRE(lib.getUserIdByName("Patel") == 0);
 }
 
 TEST_CASE("Test 7")
@@ -62,8 +60,8 @@ TEST_CASE("Test 7")
     lib.addBook("Art of the Deal", "DJ Trump");
     User u("Patel");
     lib.addUser(u);
-    lib.checkoutBook(1, 1);
-    REQUIRE(lib.findBook(1)->getCheckedOutStatus() == true);
+    lib.checkoutBook(0, 0);
+    REQUIRE(lib.findBook(0)->getCheckedOutStatus() == true);
     REQUIRE(u.getBorrowBooksSize() == 1);
 }
 
@@ -73,9 +71,9 @@ TEST_CASE("Test 8")
     lib.addBook("Art of the Deal", "DJ Trump");
     User u("Patel");
     lib.addUser(u);
-    lib.checkoutBook(1, 1);
-    lib.returnBook(1, 1);
-    REQUIRE(lib.findBook(1)->getCheckedOutStatus() == false);
+    lib.checkoutBook(0, 0);
+    lib.returnBook(0, 0);
+    REQUIRE(lib.findBook(0)->getCheckedOutStatus() == false);
     REQUIRE(u.getBorrowBooksSize() == 0);
 }
 
@@ -85,13 +83,13 @@ TEST_CASE("Test 9")
     lib.addBook("Art of the Deal", "DJ Trump");
     User u("Patel");
     lib.addUser(u);
-    lib.checkoutBook(1, 1);
+    lib.checkoutBook(0, 0);
 
     std::ostringstream out;
     out << lib;
 
     REQUIRE(out.str() == "Library's inventory:\n"
-                         "1. \"Art of the Deal\" by DJ Trump (book id: 1), status: not available\n");
+                         "1. \"Art of the Deal\" by DJ Trump (book id: 0), status: not available\n");
 }
 
 

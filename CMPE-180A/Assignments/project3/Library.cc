@@ -68,7 +68,7 @@ void Library::checkoutBook(int userid, int bookid)
                 return;
             }
 
-            user->userBorrow(*book);
+            user->borrow(*book);
             book->checkout();
         }
     }
@@ -81,7 +81,7 @@ void Library::returnBook(int userid, int bookid)
     {
         if (user->getID() == userid)
         {
-            user->userReturn(*findBook(bookid));
+            user->returnBook(*findBook(bookid));
 
             // mark book as checked out in inventory
             for (auto& book : m_inventory)
