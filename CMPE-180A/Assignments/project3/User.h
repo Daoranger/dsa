@@ -9,7 +9,7 @@
 class User
 {
 public:
-    User(std::string name);
+    explicit User(std::string name);
     void userBorrow(Book& book);
     void userReturn(Book& book);
     friend std::ostream& operator<<(std::ostream& out, const User& user);
