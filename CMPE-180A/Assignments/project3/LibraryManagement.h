@@ -1,7 +1,17 @@
 /**
+ * LibraryManagement.h
+ *
  * Author: Hoang Nguyen
- * 
+ *
+ * Date created: 3/13/2026
+ * Last modified: 3/18/2026
+ *
+ * Description: This file included the declarations of 3 classes:
+ * Book, User and Library (included the member functions
+ * and data member declarations)
+ *
  */
+
 #ifndef LIBRARYMANAGEMENT_H
 #define LIBRARYMANAGEMENT_H
 
@@ -10,6 +20,7 @@
 #include <vector>
 #include <algorithm>
 
+// Book class
 class Book
 {
 public:
@@ -32,6 +43,7 @@ private:
     bool m_checkedOut;
 };
 
+// User class
 class User
 {
 public:
@@ -47,6 +59,7 @@ private:
     std::vector<Book*> m_borrowedBooks;
 };
 
+// Library class
 class Library
 {
 public:

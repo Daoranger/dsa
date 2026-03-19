@@ -1,3 +1,15 @@
+/**
+ * LibraryManagement.cc
+ *
+ * Author: Hoang Nguyen
+ *
+ * Date created: 3/13/2026
+ * Last modified: 3/18/2026
+ *
+ * Description: This file included the implementations of 3 classes: Book, User and Library
+ *
+ */
+
 #include "LibraryManagement.h"
 
 Book::Book(std::string t, std::string a, int id)

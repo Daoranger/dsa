@@ -7,9 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Catch2 3 REQUIRED)
 
 add_executable(LibraryManager
-        Book.cc
-        User.cc
-        Library.cc
+        LibraryManagement.cc
         main.cc
 )
 
