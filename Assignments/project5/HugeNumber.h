@@ -21,7 +21,7 @@ public:
     HugeNumber();
     explicit HugeNumber(const std::string& str);
     HugeNumber(const char arr[], int size);
-    explicit HugeNumber(const std::vector<int>& vec, bool isNegative);
+    explicit HugeNumber(const std::vector<int>& digits, bool isNegative);
 
     HugeNumber operator+(const HugeNumber& other) const;
     HugeNumber operator-(const HugeNumber& other) const;
@@ -49,7 +49,7 @@ public:
     void normalize();
 
 private:
-    std::vector<int> m_vector;
+    std::vector<int> m_digits;
     bool m_isNegative {};
 };
 
