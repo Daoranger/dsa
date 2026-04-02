@@ -3,7 +3,5 @@
 
 int main()
 {
-    linkedListIterator<int> lli;
-
-    std::cout << "lli." << "\n";
+    return 0;
 }

@@ -102,6 +102,7 @@ HugeNumber::HugeNumber(const std::vector<int>& digits, bool isNegative)
 
 HugeNumber HugeNumber::operator+(const HugeNumber &other) const
 {
+    
     HugeNumber result {};       // empty
     HugeNumber v1 = *this;
     HugeNumber v2 = other;
