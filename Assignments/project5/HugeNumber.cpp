@@ -102,48 +102,56 @@ HugeNumber::HugeNumber(const std::vector<int>& digits, bool isNegative)
 
 HugeNumber HugeNumber::operator+(const HugeNumber &other) const
 {
-    
     HugeNumber result {};       // empty
-    HugeNumber v1 = *this;
-    HugeNumber v2 = other;
+    result.m_digits.clear();
+
+    HugeNumber v1 {*this};
+    HugeNumber v2 {other};
+    int sum {};
+    int carry {};
+    int digit {};
 
     std::reverse(v1.m_digits.begin(), v1.m_digits.end());
     std::reverse(v2.m_digits.begin(), v2.m_digits.end());
 
-    int carry {};
-
     int smallerSize = std::min(v1.m_digits.size(), v2.m_digits.size());
 
-    for (int i = 0; i < smallerSize; ++i)
+    if (this->m_isNegative == other.m_isNegative)         // if same sign
     {
-        int n = v1.m_digits[i] + v2.m_digits[i] + carry;
-        carry = n / 10;
-        result.m_digits.push_back(n % 10);
-    }
-
-    if (v1.m_digits.size() > v2.m_digits.size())
-    {
-        for (int i = smallerSize; i < v1.m_digits.size(); ++i)
+        for (int i = 0; i < smallerSize; ++i)
         {
-            int n = v1.m_digits[i] + carry;
-            carry = n / 10;
-            result.m_digits.push_back(n % 10);
+            sum = v1.m_digits[i] + v2.m_digits[i] + carry;
+            carry = sum / 10;
+            digit = sum % 10;
+            result.m_digits.push_back(digit);
         }
+
+        const auto& larger = (v1.m_digits.size() > v2.m_digits.size()) ? v1 : v2;
+
+        for (int i = smallerSize; i < larger.m_digits.size(); ++i)
+        {
+            sum = larger.m_digits[i] + carry;
+            carry = sum / 10;
+            digit = sum % 10;
+            result.m_digits.push_back(digit);
+        }
+
+        if (carry != 0)
+        {
+            result.m_digits.push_back(carry);
+        }
+
+        // set sign for result
+        result.m_isNegative = this->m_isNegative;
     }
     else
     {
-        for (int i = smallerSize; i < v2.m_digits.size(); ++i)
-        {
-            int n = v2.m_digits[i] + carry;
-            carry = n / 10;
-            result.m_digits.push_back(n % 10);
-        }
+
     }
 
-    if (carry != 0)
-    {
-        result.m_digits.push_back(carry);
-    }
+    for (auto d : result.m_digits)
+        std::cout << d << " ";
+    std::cout << "\n";
 
     std::reverse(result.m_digits.begin(), result.m_digits.end());
     return result;

@@ -178,3 +178,40 @@ TEST(VectorConstructor, MalformedVectorThrows)
     EXPECT_THROW(HugeNumber(std::vector<int>{1, -2, 3}, true), std::invalid_argument);
     EXPECT_THROW(HugeNumber(std::vector<int>{10, 2, 3}, false), std::invalid_argument);
 }
+
+////////////////////////////////////////////////////////////////////////////////////
+TEST(Addition, BothPositive)
+{
+    HugeNumber hn1(std::string("90"));
+    HugeNumber hn2(std::string("90"));
+
+    std::cout << hn1 + hn2 << "\n";
+}
+
+TEST(Addition, BothPositiveOneLarger)
+{
+    HugeNumber hn1(std::string("189"));
+    HugeNumber hn2(std::string("91"));
+
+    HugeNumber hnr(std::string("280"));
+
+    std::cout << hn1 + hn2 << "\n";
+}
+
+TEST(Addition, BothNegative)
+{
+    HugeNumber hn1(std::string("-90"));
+    HugeNumber hn2(std::string("-90"));
+
+    std::cout << hn1 + hn2 << "\n";
+}
+
+TEST(Addition, BothNegativeOneLarger)
+{
+    HugeNumber hn1(std::string("-189"));
+    HugeNumber hn2(std::string("-91"));
+
+    HugeNumber hnr(std::string("-280"));
+
+    std::cout << hn1 + hn2 << "\n";
+}
