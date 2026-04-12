@@ -9,8 +9,8 @@
 #include <algorithm>
 
 HugeNumber::HugeNumber()
-    : m_digits{0}
-    , m_isNegative{false}
+    : digits_{0}
+    , isNegative_{false}
 {
 }
 
@@ -37,12 +37,12 @@ HugeNumber::HugeNumber(const std::string &str)
         {
             if (str[i + 1] != '0')
             {
-                m_isNegative = true;
+                isNegative_ = true;
             }
             continue;
         }
 
-        m_digits.push_back(str[i] - '0');
+        digits_.push_back(str[i] - '0');
     }
 }
 
@@ -71,12 +71,12 @@ HugeNumber::HugeNumber(const char arr[], int size)
         {
             if (arr[i + 1] != '0')
             {
-                m_isNegative = true;
+                isNegative_ = true;
             }
             continue;
         }
 
-        m_digits.push_back(arr[i] - '0');
+        digits_.push_back(arr[i] - '0');
     }
 }
 
@@ -92,18 +92,17 @@ HugeNumber::HugeNumber(const std::vector<int>& digits, bool isNegative)
     }
 
     if (digits[0] != 0)
-        m_isNegative = isNegative;
+        isNegative_ = isNegative;
 
     for (const auto& digit : digits)
     {
-        m_digits.push_back(digit);
+        digits_.push_back(digit);
     }
 }
 
 HugeNumber HugeNumber::operator+(const HugeNumber &other) const
 {
     HugeNumber result {};       // empty
-    result.m_digits.clear();
 
     HugeNumber v1 {*this};
     HugeNumber v2 {other};
@@ -111,81 +110,267 @@ HugeNumber HugeNumber::operator+(const HugeNumber &other) const
     int carry {};
     int digit {};
 
-    std::reverse(v1.m_digits.begin(), v1.m_digits.end());
-    std::reverse(v2.m_digits.begin(), v2.m_digits.end());
+    std::reverse(v1.digits_.begin(), v1.digits_.end());
+    std::reverse(v2.digits_.begin(), v2.digits_.end());
 
-    int smallerSize = std::min(v1.m_digits.size(), v2.m_digits.size());
+    int smallerSize = std::min(v1.digits_.size(), v2.digits_.size());
 
-    if (this->m_isNegative == other.m_isNegative)         // if same sign
+    if (this->isNegative_ == other.isNegative_)         // if same sign
     {
         for (int i = 0; i < smallerSize; ++i)
         {
-            sum = v1.m_digits[i] + v2.m_digits[i] + carry;
+            sum = v1.digits_[i] + v2.digits_[i] + carry;
             carry = sum / 10;
             digit = sum % 10;
-            result.m_digits.push_back(digit);
+            result.digits_.push_back(digit);
         }
 
-        const auto& larger = (v1.m_digits.size() > v2.m_digits.size()) ? v1 : v2;
+        const auto& larger = (v1.digits_.size() > v2.digits_.size()) ? v1 : v2;
 
-        for (int i = smallerSize; i < larger.m_digits.size(); ++i)
+        for (int i = smallerSize; i < larger.digits_.size(); ++i)
         {
-            sum = larger.m_digits[i] + carry;
+            sum = larger.digits_[i] + carry;
             carry = sum / 10;
             digit = sum % 10;
-            result.m_digits.push_back(digit);
+            result.digits_.push_back(digit);
         }
 
         if (carry != 0)
         {
-            result.m_digits.push_back(carry);
+            result.digits_.push_back(carry);
         }
 
         // set sign for result
-        result.m_isNegative = this->m_isNegative;
+        result.isNegative_ = this->isNegative_;
     }
     else
     {
-
+        if (*this < other)
+        {
+            return other - *this;
+        }
+        else
+        {
+            return *this - other;
+        }
     }
 
-    for (auto d : result.m_digits)
-        std::cout << d << " ";
-    std::cout << "\n";
-
-    std::reverse(result.m_digits.begin(), result.m_digits.end());
+    std::reverse(result.digits_.begin(), result.digits_.end());
     return result;
+}
+
+bool HugeNumber::operator==(const HugeNumber &other) const
+{
+    if (numDigits() != other.numDigits() || isNegative_ != other.isNegative_)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < numDigits(); ++i)
+    {
+        if (digits_[i] != other.digits_[i])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool HugeNumber::operator!=(const HugeNumber &other) const
+{
+    return !(*this == other);
+}
+
+bool HugeNumber::operator<(const HugeNumber &other) const
+{
+    // different sign: if current is negative true, if not false
+    if (isNegative_ != other.isNegative_)
+    {
+        return isNegative_;
+    }
+
+    int comp = compareMagnitudes(*this, other);
+
+    // same sign
+    if (!isNegative_) // if both positive, only true if a < b
+    {
+        return comp < 0;
+    }
+    else // if bot negative, only true if a > b
+    {
+        return comp > 0;
+    }
+}
+
+bool HugeNumber::operator<=(const HugeNumber &other) const
+{
+    return !(other < *this);
+}
+
+bool HugeNumber::operator>(const HugeNumber &other) const
+{
+    return other < *this;
+}
+
+bool HugeNumber::operator>=(const HugeNumber &other) const
+{
+    return !(*this < other);
+}
+
+HugeNumber HugeNumber::operator~() const
+{
+    HugeNumber temp = *this;
+    std::reverse(temp.digits_.begin(), temp.digits_.end());
+    temp.normalize();
+    return temp;
 }
 
 bool HugeNumber::isZero() const
 {
-    return (numDigits() == 1) && (!m_isNegative) && (m_digits[0] == 0);
+    return (numDigits() == 1) && (!isNegative_) && (digits_[0] == 0);
 }
 
 int HugeNumber::numDigits() const
 {
-    return m_digits.size();
+    return digits_.size();
 }
 
 HugeNumber HugeNumber::abs() const
 {
     HugeNumber absResult = *this;
-    absResult.m_isNegative = false;
+    absResult.isNegative_ = false;
 
     return absResult;
 }
 
+void HugeNumber::normalize()
+{
+    // case 1: delete all leading zeroes
+    while (digits_.size() > 1 && digits_.front() == 0)
+    {
+        digits_.erase(digits_.begin());
+    }
+
+    // case 2: if last element is zero, ensure it is positive
+    if (digits_[0] == 0)
+    {
+        isNegative_ = false;
+    }
+}
+
+// Return -1 if a < b, return 1 if a > b, return 0 if a == b
+int HugeNumber::compareMagnitudes(const HugeNumber& a, const HugeNumber& b) const
+{
+    // if diff number of digits
+    if (a.digits_.size() != b.digits_.size())
+    {
+        return (a.digits_.size() < b.digits_.size()) ? -1 : 1;
+    }
+
+    // if same number of digits, compare by each digits
+    for (int i = 0; i < a.digits_.size(); ++i)
+    {
+        if (a.digits_[i] != b.digits_[i])
+        {
+            return (a.digits_[i] < b.digits_[i]) ? -1 : 1;
+        }
+    }
+
+    // a = b
+    return 0;
+}
+
+HugeNumber HugeNumber::addMagnitudes(const HugeNumber &a, const HugeNumber &b) const
+{
+    HugeNumber result {};       // empty
+
+    HugeNumber v1 {a};
+    HugeNumber v2 {b};
+    int sum {};
+    int carry {};
+    int digit {};
+
+    std::reverse(v1.digits_.begin(), v1.digits_.end());
+    std::reverse(v2.digits_.begin(), v2.digits_.end());
+
+    int smallerSize = std::min(v1.digits_.size(), v2.digits_.size());
+
+    for (int i = 0; i < smallerSize; ++i)
+    {
+        sum = v1.digits_[i] + v2.digits_[i] + carry;
+        carry = sum / 10;
+        digit = sum % 10;
+        result.digits_.push_back(digit);
+    }
+
+    const auto& larger = (v1.digits_.size() > v2.digits_.size()) ? v1 : v2;
+
+    for (int i = smallerSize; i < larger.digits_.size(); ++i)
+    {
+        sum = larger.digits_[i] + carry;
+        carry = sum / 10;
+        digit = sum % 10;
+        result.digits_.push_back(digit);
+    }
+
+    if (carry != 0)
+    {
+        result.digits_.push_back(carry);
+    }
+
+    return result;
+}
+
 std::ostream & operator<<(std::ostream &out, const HugeNumber &hugeNumber)
 {
-    if (hugeNumber.m_isNegative)
+    if (hugeNumber.isNegative_)
     {
         out << "-";
     }
 
-    for (const auto& digit : hugeNumber.m_digits)
+    for (const auto& digit : hugeNumber.digits_)
     {
         out << digit;
     }
 
     return out;
+}
+
+std::istream & operator>>(std::istream &in, HugeNumber& hugeNumber)
+{
+    hugeNumber.digits_.clear();
+    hugeNumber.isNegative_ = false;
+
+    std::string s;
+    in >> s;
+
+    for (int i = 0; i < s.size(); ++i)
+    {
+        if (!isdigit(s[i]))
+        {
+            if (i == 0 && s[i] == '-')
+            {
+                continue;
+            }
+            throw std::invalid_argument("HugeNumber: empty input");
+        }
+    }
+
+    if (s[0] == '-')
+    {
+        hugeNumber.isNegative_ = true;
+    }
+
+    for (int i = 0; i < s.size(); ++i)
+    {
+        if (s[i] == '-')
+        {
+            continue;
+        }
+        hugeNumber.digits_.push_back(s[i] - '0');
+    }
+    hugeNumber.normalize();
+
+    return in;
 }

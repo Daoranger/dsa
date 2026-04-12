@@ -26,7 +26,7 @@ public:
     HugeNumber operator+(const HugeNumber& other) const;
     HugeNumber operator-(const HugeNumber& other) const;
     HugeNumber operator*(const HugeNumber& other) const;
-    bool operator==(const HugeNumber& other) const;
+    bool operator==(const HugeNumber& other) const;     // done
     bool operator!=(const HugeNumber& other) const;
     bool operator<(const HugeNumber& other) const;
     bool operator<=(const HugeNumber& other) const;
@@ -36,21 +36,26 @@ public:
     HugeNumber operator++(int);
     HugeNumber& operator--();
     HugeNumber operator--(int);
-    friend std::ostream& operator<<(std::ostream& out, const HugeNumber& hugeNumber);
-    friend std::istream& operator>>(std::istream& in, HugeNumber& hugeNumber);
-    HugeNumber operator~() const;
+    friend std::ostream& operator<<(std::ostream& out, const HugeNumber& hugeNumber);   // done
+    friend std::istream& operator>>(std::istream& in, HugeNumber& hugeNumber);          // done
+    HugeNumber operator~() const;   // done
 
-    bool isZero() const;
-    int numDigits() const;
-    HugeNumber abs() const;
+    bool isZero() const;        // done
+    int numDigits() const;      // done
+    HugeNumber abs() const;     // done
 
     // remove leading zeros
     // ensures zero is never stored as negative
-    void normalize();
+    void normalize();           // done
 
 private:
-    std::vector<int> m_digits;
-    bool m_isNegative {};
+    std::vector<int> digits_;
+    bool isNegative_ {};
+
+    // helper functions
+    int compareMagnitudes(const HugeNumber& a, const HugeNumber& b) const;
+    HugeNumber addMagnitudes(const HugeNumber& a, const HugeNumber& b) const;
+    HugeNumber subtractMagnitudes(const HugeNumber& larger, const HugeNumber& smaller) const;
 };
 
 

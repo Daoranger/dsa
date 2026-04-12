@@ -3,15 +3,11 @@
 
 int fibMemo(int n, std::vector<int>& memo)
 {
-    if (n == 0) return 0;
-    if (n == 1) return 1;
+    // base cases
+    if (n <= 1) return n;
 
-    if (memo[n] != -1)
-    {
-        return memo[n];
-    }
-    
-    memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo); 
+    if (memo[n] == -1)
+        memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);
 
     return memo[n];
 }
