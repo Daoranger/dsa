@@ -18,12 +18,12 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(HugeNumber
-        "HugeNumber.cpp"
-        "main.cpp"
+        "HugeNumber.cc"
+        "main.cc"
 )
 
 add_executable(HugeNumberTest
-        "HugeNumber.cpp"
+        "HugeNumber.cc"
         "HugeNumberTest.cpp"
 )
 

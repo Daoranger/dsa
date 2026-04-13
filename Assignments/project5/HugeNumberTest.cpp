@@ -414,5 +414,15 @@ TEST(LessThan, Test11)
     ASSERT_EQ(hn1 < hn2, false);
 }
 
+TEST(Multiplication, Test)
+{
+    HugeNumber hn1(std::string("-797"));
+    HugeNumber hn2(std::string("12"));
+    HugeNumber hnr(std::string("-9564"));
+
+    ASSERT_EQ(hn1 * hn2, hnr);
+    std::cout << hn1 * hn2 << '\n';
+}
+
 
 
