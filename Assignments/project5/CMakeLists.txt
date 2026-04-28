@@ -17,20 +17,20 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(HugeNumber
-        "HugeNumber.cc"
+add_executable(Shapes
+        "Shapes.cc"
         "main.cc"
 )
 
-add_executable(HugeNumberTest
-        "HugeNumber.cc"
-        "HugeNumberTest.cpp"
+add_executable(ShapesTest
+        "Shapes.cc"
+        "ShapesTest.cpp"
 )
 
 target_link_libraries(
-        HugeNumberTest
+        ShapesTest
         GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(HugeNumberTest)
+gtest_discover_tests(ShapesTest)
