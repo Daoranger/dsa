@@ -24,7 +24,7 @@ add_executable(Shapes
 
 add_executable(ShapesTest
         "Shapes.cc"
-        "ShapesTest.cpp"
+        "ShapesTest.cc"
 )
 
 target_link_libraries(
