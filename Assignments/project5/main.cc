@@ -32,5 +32,30 @@ int main() {
     Rectangle r3(XYPoint(0, 0), XYPoint(2, 0), XYPoint(2, 1), XYPoint(0, 1));
     std::cout << "Rectangle 3: " << r3.area() << std::endl;
 
+    std::vector<Shape*> shapes;
+    shapes.push_back(&c1);
+    shapes.push_back(&c2);
+    shapes.push_back(&c3);
+    shapes.push_back(&t1);
+    shapes.push_back(&t2);
+    shapes.push_back(&t3);
+    shapes.push_back(&r1);
+    shapes.push_back(&r2);
+    shapes.push_back(&r3);
+
+    std::cout << "\nBefore sorting:\n";
+    for (auto& shape : shapes)
+    {
+        std::cout << shape->area() << ", ";
+    }
+
+    ShapeSorter(shapes);
+
+    std::cout << "\nAfter sorting:\n";
+    for (auto& shape : shapes)
+    {
+        std::cout << shape->area() << ", ";
+    }
+
     return 0;
 }
