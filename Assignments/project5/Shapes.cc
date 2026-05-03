@@ -1,5 +1,5 @@
 #include "Shapes.h"
-
+#include <algorithm>
 #include <cmath>
 
 XYPoint::XYPoint(int xc, int yc)
@@ -32,6 +32,11 @@ float distance(const XYPoint &p1, const XYPoint &p2, const XYPoint &p3, const XY
 
 Shape::~Shape()
 {
+}
+
+void ShapeSorter(std::vector<Shape*>& shapes)
+{
+    std::sort(shapes.begin(), shapes.end(), ShapeAreaComparator());
 }
 
 Circle::Circle(XYPoint center, double radius)

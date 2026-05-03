@@ -25,7 +25,16 @@ public:
     virtual double area() = 0;
 };
 
+struct ShapeAreaComparator
+{
+    bool operator()(Shape* a, Shape* b) const
+    {
+        return a->area() < b->area();
+    }
+};
+
 void ShapeSorter(std::vector<Shape*>& shapes);
+
 
 constexpr double PI = 3.14159265359;
 
