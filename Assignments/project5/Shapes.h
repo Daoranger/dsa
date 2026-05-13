@@ -17,22 +17,7 @@
 #define CMPE180A_SHAPES_H
 
 #include <vector>
-
-//-------------------- XYPoint class --------------------//
-class XYPoint
-{
-public:
-    
-    int x;
-    int y;
-
-    XYPoint(int xc, int yc);
-};
-
-double distance(const XYPoint& p1, const XYPoint& p2);
-double distance(const XYPoint& p1, const XYPoint& p2, const XYPoint& p3);
-double distance(const XYPoint& p1, const XYPoint& p2, const XYPoint& p3, const XYPoint& p4);
-double distance(const XYPoint& p1, const XYPoint& p2, const XYPoint& p3, const XYPoint& p4, const XYPoint& p5);
+#include "XYPoint.h"
 
 //-------------------- Shape class --------------------//
 class Shape

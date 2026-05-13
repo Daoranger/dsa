@@ -13,34 +13,6 @@
 #include <algorithm>
 #include <cmath>
 
-XYPoint::XYPoint(int xc, int yc)
-    : x(xc)
-    , y(yc)
-{
-}
-
-double distance(const XYPoint& p1, const XYPoint& p2)
-{
-    double dx = static_cast<double>(p2.x) - static_cast<double>(p1.x);
-    double dy = static_cast<double>(p2.y) - static_cast<double>(p1.y);
-    return std::sqrt(dx * dx + dy * dy);
-}
-
-double distance(const XYPoint &p1, const XYPoint &p2, const XYPoint &p3)
-{
-    return distance(p1, p2) + distance(p2, p3);
-}
-
-double distance(const XYPoint &p1, const XYPoint &p2, const XYPoint &p3, const XYPoint &p4)
-{
-    return distance(p1, p2, p3) + distance(p3, p4);
-}
-
-double distance(const XYPoint &p1, const XYPoint &p2, const XYPoint &p3, const XYPoint &p4, const XYPoint &p5)
-{
-    return distance(p1, p2, p3, p4) + distance(p4, p5);
-}
-
 Shape::~Shape()
 {
 }
